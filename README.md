@@ -7,11 +7,12 @@ Master čvor zatim prima vrijednosti i prikazuje ih na terminalu pomoću `candum
 ---
 
 ## 🛠 Korišćene tehnologije
-- **PHT senzor** (temperature, humidity, pressure)  
+- **PHT senzor** (temperature, humidity, pressure)(https://www.mikroe.com/pht-click?srsltid=AfmBOorAwQCGiEvDxiJhZ9U22w2EniEKsk12RDy7NyGN2Wl6Xgmj-3L3)  
 - **Raspberry Pi** – slave čvor, I²C komunikacija  
 - **CANopenLinux** – [CANopenNode/CANopenLinux](https://canopennode.github.io/CANopenLinux/index.html)  
 - **CAN-utils (candump)** – alat za prikaz CAN poruka [CAN-utils](https://github.com/guticdejan/ikm-prj.git)
-- **CANopen konfigurator (EDS Editor)** – [CANopenEditor](https://github.com/CANopenNode/CANopenEditor)  
+- **CANopen konfigurator (EDS Editor)** – [CANopenEditor](https://github.com/CANopenNode/CANopenEditor)
+-  **Dodatni linkovi** - (https://github.com/guticdejan/ikm-prj.git)
 
 ---
 
@@ -252,10 +253,62 @@ Na slici ispod vidi se rad slave i master strane:
 
 ---
 
-## 🚀 Kako pokrenuti cijeli sistem
-1. Na Raspberry Pi pokrenuti slave aplikaciju sa PHT senzorom.  
-2. Na master strani pokrenuti `candump` za prijem CANopen poruka.  
-3. Na terminalu mastera posmatrati vrijednosti (temperatura, vlažnost, pritisak).  
+### 1️⃣ Preuzimanje repozitorija
+Na svom računaru:
+```bash
+git clone https://github.com/jelena0000/CANopen-PHT.git
+cd CANopen-PHT
+```
+
+---
+
+### 2️⃣ Kros-kompajliranje slave aplikacije
+Na lokalnom računaru potrebno je kros-kompajlirati aplikaciju za Raspberry Pi:
+
+```bash
+cd code/slave/CANopenLinux
+make CC="arm-linux-gnueabihf-gcc -std=gnu11"
+```
+
+➡️ Ovo će generisati izvršni fajl **canopend** spreman za Raspberry Pi.
+
+---
+
+### 3️⃣ Priprema master čvora
+Na Raspberry Pi (ili drugom Linux računaru koji će biti **master**):
+
+```bash
+sudo apt-get update
+sudo apt-get install can-utils
+```
+
+---
+
+### 4️⃣ Prebacivanje fajlova na Raspberry Pi
+Prebaci kros-kompajlirani slave program i potrebne biblioteke na Raspberry Pi (npr. pomoću `scp`):
+
+```bash
+scp ./canopend pi@<RPi-IP>:/home/pi/CANopen-PHT/code/slave/
+```
+
+---
+
+### 5️⃣ Pokretanje sistema
+
+🔹 Na **Raspberry Pi (slave)**:
+```bash
+cd /home/pi/CANopen-PHT/code/slave
+./canopend can0 -i 2
+```
+
+🔹 Na **master strani** (drugi RPi ili Linux računar):  
+Pokrenuti CAN interfejs i koristiti `can-utils` za testiranje i prijem podataka.
+
+Primjer:
+```bash
+./candump -td -a can0
+```
+--- 
 
 ```
 Slave → šalje podatke
