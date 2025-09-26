@@ -24,8 +24,8 @@ Master čvor zatim prima vrijednosti i prikazuje ih na terminalu pomoću `candum
 [PHT sensor] --I²C--> [RPi Slave] --CANopen--> [Master] --> [Terminal Output]
 ```
 
-![PHT Sensor](https://cdn-shop.adafruit.com/970x728/1893-00.jpg)
-![Raspberry Pi](https://www.raspberrypi.com/app/uploads/2021/07/Raspberry-Pi-4-1024x683.jpg)
+![PHT Sensor]([https://cdn-shop.adafruit.com/970x728/1893-00.jpg](https://cdn1-shop.mikroe.com/img/product/pht-click/pht-click-thickbox_default-12x.jpg))
+![Raspberry Pi](https://upload.wikimedia.org/wikipedia/commons/f/f1/Raspberry_Pi_4_Model_B_-_Side.jpg)
 
 ---
 
@@ -52,7 +52,7 @@ Na pločici se nalaze šrafni konektori za povezivanje CAN linija:
 
 Primjer CAN ekspanzione pločice:
 
-![CAN Ekspanziona pločica](bfc1ab86-d7c3-47ba-8ddf-f1e25d38c1fd.png)
+![CAN Ekspanziona pločica]![can_hat](https://github.com/user-attachments/assets/24296192-6db7-4866-bf98-e482010d19b5)
 
 ---
 
