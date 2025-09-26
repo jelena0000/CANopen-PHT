@@ -52,7 +52,7 @@ Na pločici se nalaze šrafni konektori za povezivanje CAN linija:
 
 Primjer CAN ekspanzione pločice:
 
-![CAN Ekspanziona pločica]![can_hat](https://github.com/user-attachments/assets/24296192-6db7-4866-bf98-e482010d19b5)
+![can_hat](https://github.com/user-attachments/assets/24296192-6db7-4866-bf98-e482010d19b5)
 
 ---
 
