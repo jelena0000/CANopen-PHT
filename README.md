@@ -7,7 +7,7 @@ Master čvor zatim prima vrijednosti i prikazuje ih na terminalu pomoću `candum
 ---
 
 ## 🛠 Korišćene tehnologije
-- **PHT senzor** (temperature, humidity, pressure) https://www.mikroe.com/pht-click?srsltid=AfmBOorAwQCGiEvDxiJhZ9U22w2EniEKsk12RDy7NyGN2Wl6Xgmj-3L3  
+- **PHT senzor** (temperature, humidity, pressure)- https://www.mikroe.com/pht-click?srsltid=AfmBOorAwQCGiEvDxiJhZ9U22w2EniEKsk12RDy7NyGN2Wl6Xgmj-3L3  
 - **Raspberry Pi** – slave čvor, I²C komunikacija  
 - **CANopenLinux** – [CANopenNode/CANopenLinux](https://canopennode.github.io/CANopenLinux/index.html)  
 - **CAN-utils (candump)** – alat za prikaz CAN poruka [CAN-utils](https://github.com/guticdejan/ikm-prj.git)
