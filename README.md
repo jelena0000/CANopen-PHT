@@ -248,7 +248,7 @@ Na slici ispod vidi se rad slave i master strane:
 - **Lijevo:** slave čvor (RPi) šalje prosječne vrijednosti temperature na 3 sekunde.  
 - **Desno:** master čvor prima CANopen poruke pomoću `candump`.
 
-![demo](<img width="1687" height="557" alt="7" src="https://github.com/user-attachments/assets/c560b5a3-f446-428f-be3c-76fb16d51c70" />)
+![demo](<img width="1687" height="557" alt="7" src="https://github.com/user-attachments/assets/b4b6843b-e7d9-473d-933b-275c47403ee9" />)
 
 ---
 
