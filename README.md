@@ -159,16 +159,14 @@ To su:
    - Koristi se za _GUI_ editora.
   
 Nakon uspješnog pokretanja _.sln_ fajla, potrebno je jedan od editora postaviti kao _startup project_ na način da se klikne desnim klikom na fajl _EDSEditorGUI_ koji se nalazi u folder strukturi, a potom čekira opcija _Set as Startup Project_. 
-![izgled-vs](<img width="1435" height="897" alt="1" src="https://github.com/user-attachments/assets/63bc19e0-88fb-439b-88fb-ac9707d83f0a" />) <br>
-_Izgled programskog okruženja sa folder strukturom_
 
 Nakon toga, moguće je pokrenuti GUI koji služi za lakše kretanje kroz konfigurator. <br>
-![izgled-konfiguratora](<img width="1438" height="892" alt="2" src="https://github.com/user-attachments/assets/8884bfa0-a6a8-4768-9239-99b97ecbf70a" />) <br>
+![izgled-konfiguratora](https://github.com/jelena0000/CANopen-PHT/blob/main/images/izgled_konfiguratora.png) <br>
 _Izgled početnog ekrana konfiguratora_
 
 Da bi se uređivao OD mreže, potrebno je učitati _DS301_profile.xpd_ fajl, a koji se nalazi u folderu CANopenLinux → CANopenNode → example. To je moguće uraditi klikom na karticu _File_, potom izborom opcije _Open_ i navigiranjem do željenog fajla. Sada će konfigurator imati izgled kao na slici ispod.
 
-![izgled-konfigurator](<img width="1440" height="897" alt="3" src="https://github.com/user-attachments/assets/9cf595e8-04c1-46e6-a2c8-4f79883327ed" />) <br>
+![izgled-konfigurator](https://github.com/jelena0000/CANopen-PHT/blob/main/images/izgled_konf_2.png) <br>
 _Izgled konfiguratora sa učitanim .xpd fajlom_
 
 Sada je moguće dodavati objekte, pregledati postojeće i konfigurisati ostale parametre u mreži. <br> U našem slučaju dodavaćemo objekat koji će predstavljati podatak o temperaturi vazduha koju mjeri _PHT_ senzor.
@@ -177,7 +175,7 @@ Sada je moguće dodavati objekte, pregledati postojeće i konfigurisati ostale p
 
 Klikom na _Index_ ili _Name_ na kartici _Manufacturer Specific Parameters_ moguće je dodati objekat na željenom indeksu (paziti da li je indeks u dozvoljenom opsegu) i željene strukture (_VAR_, _RECORD_ ili _ARRAY_), te dati ime objektu. U našem slučaju promjenljiva će se zvati _temperature_ i biće obična promjenljiva - VAR.<br>
 Kada se objekat doda, moguće je podesiti dodatne parametre za taj objekat, kao što je prikazano na slici ispod.
-![temperature-var](<img width="1436" height="898" alt="4" src="https://github.com/user-attachments/assets/017c530a-c53e-45ea-8491-651ac8cc2204" />)<br>
+![temperature-var](https://github.com/jelena0000/CANopen-PHT/blob/main/images/temperature_var.png)<br>
 _Dodavanje i konfigurisanje novog objekta_ <br>
 Potrebno je parametre definisati u skladu sa upotrebom objekta, pa je u našem slučaju za objekat kojim se predstavlja temperatura
 * Data type - _unsigned int 32_ jer senzor čita 4B podatak o temperaturi
@@ -188,14 +186,14 @@ Potrebno je parametre definisati u skladu sa upotrebom objekta, pa je u našem s
 Na _slave_ čvoru je potrebno mapirati ovaj objekat u _TPDO_ (za prenos), a na _master_ čvoru u _RPDO_ (za čitanje). To se može uraditi na karticama _TX PDO Mapping_ i _RX PDO Mapping_, redom. <br>
 Mapiranje se može izvršiti na za to predviđenim indeksima, tako što se željeni objekat prevuče na poziciju na odabranom indeksu. Osim toga, moguće je podesiti parametre mapiranja (_COB_, tip prenosa, tajmer i slično). 
 
-![TPDO](<img width="1436" height="896" alt="5" src="https://github.com/user-attachments/assets/3a149096-6e8b-4ebb-b345-9bc60fb744d1" />)
+![TPDO](https://github.com/jelena0000/CANopen-PHT/blob/main/images/TPDO.png)
 _TPDO mapiranje objekta na slave čvoru_ <br>
 
 U konkretnom slučaju _COB_ dodjeljujemo broj 182 (0x180 + Node ID). Tip prenosa je _event-driven_ i šaljemo podatke svakih 1000 ms, tako da u odgovarajuća polja upisujemo vrijednosti 0xFF (255) i 1000, kao što je pokazano na slici iznad.
 
 Na _master_ čvoru potrebno je u skladu sa podešavanjima na _slave_ čvoru dodati objekat koji će ovaj čvor čitati i obrađivati. Objekat dodajemo na isti način, pazeći da se tip podataka i ostali parametri poklapaju. Jedina razlika se pravi u mapiranju objekta jer je sada potrebno da se taj podatak čita - _RPDO_ mapiranje. 
 
-![RPDO](<img width="1435" height="893" alt="6" src="https://github.com/user-attachments/assets/37408485-e6bd-48b2-8cf6-1a321d252629" />)
+![RPDO](https://github.com/jelena0000/CANopen-PHT/blob/main/images/RPDO.png)
 _RPDO mapiranje objekta na master čvoru_ <br>
 
 Objekat mora imati isti _COB_ kako bi postojala veza između mapiranih objekata i kako bi razmjena podataka mogla biti uspješna. 
@@ -249,10 +247,13 @@ Na slici ispod vidi se rad slave i master strane:
 - **Lijevo:** slave čvor (RPi) šalje prosječne vrijednosti temperature na 3 sekunde.  
 - **Desno:** master čvor prima CANopen poruke pomoću `candump`.
 
-![demo](<img width="1687" height="557" alt="7" src="https://github.com/user-attachments/assets/b4b6843b-e7d9-473d-933b-275c47403ee9" />)
+![demo](https://github.com/jelena0000/CANopen-PHT/blob/main/images/demo.png)
 
 ---
 
+## 🚀 Kako pokrenuti cijeli sistem
+
+Prvo je potrebno preuzeti repozitorij i pripremiti Raspberry Pi za rad *slave* i *master* čvora.
 ### 1️⃣ Preuzimanje repozitorija
 Na svom računaru:
 ```bash
